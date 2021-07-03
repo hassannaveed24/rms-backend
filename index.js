@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const app = express();
 const port = 8000;
 require('./storage/db')
@@ -10,6 +11,7 @@ const waiter = require("./routes/waiter");
 const order = require("./routes/order");
 
 app.use(express.json());
+app.use(cors())
 // app.use("/cheff", cheff);
 // app.use("/customer", customer);
 // app.use("/meal", meal);
