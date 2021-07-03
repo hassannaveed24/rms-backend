@@ -13,10 +13,10 @@ const order = require("./routes/order");
 app.use(express.json());
 app.use(cors())
 app.use("/cheffs", cheff);
-// app.use("/customer", customer);
-// app.use("/meal", meal);
+app.use("/customers", customer);
+// app.use("/meals", meal);
 app.use("/waiters", waiter);
-// app.use("/order", order);
+// app.use("/orders", order);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)
