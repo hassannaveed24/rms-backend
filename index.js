@@ -12,7 +12,7 @@ const order = require("./routes/order");
 
 app.use(express.json());
 app.use(cors())
-// app.use("/cheff", cheff);
+app.use("/cheffs", cheff);
 // app.use("/customer", customer);
 // app.use("/meal", meal);
 app.use("/waiters", waiter);
