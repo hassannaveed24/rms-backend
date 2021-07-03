@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cors())
 app.use("/cheffs", cheff);
 app.use("/customers", customer);
-// app.use("/meals", meal);
+app.use("/meals", meal);
 app.use("/waiters", waiter);
 // app.use("/orders", order);
 
