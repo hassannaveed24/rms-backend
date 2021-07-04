@@ -32,8 +32,9 @@ router.get("/", async (req, res) => {
         } else if(req.query.limit && req.query.page) {
             const {limit, page} = req.query;
             sql = `SELECT * FROM waiters ORDER BY waiter_id LIMIT ? OFFSET ?;`
-            const [rows, fields] = await db.execute(sql,[limit, (parseInt(page) * parseInt(limit) ).toString()])
-            res.status(200).send(rows)    
+            let [rows, fields] = await db.execute(sql,[limit, ((parseInt(page) - 1 )* parseInt(limit)  ).toString()])
+            const count = await db.query(`SELECT COUNT(waiter_id) as count FROM waiters`, []);
+            res.status(200).send({pages: Math.ceil(count[0][0].count/limit), rows})    
         }
         
     } catch (error) {
