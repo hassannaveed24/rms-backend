@@ -16,7 +16,7 @@ app.use("/cheffs", cheff);
 app.use("/customers", customer);
 app.use("/meals", meal);
 app.use("/waiters", waiter);
-// app.use("/orders", order);
+app.use("/orders", order);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)
