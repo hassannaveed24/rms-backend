@@ -16,6 +16,18 @@ router.post("/", async (req, res) => {
     }
 })
 
+router.get("/count", async (req, res) => {
+    console.log("/count")
+    try {
+        const db = await connection;
+        const count = await db.query(`SELECT COUNT(waiter_id) as count FROM waiters`, []);
+            res.status(200).send({count: count[0][0].count})
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({error})        
+    }
+})
+
 router.get("/", async (req, res) => {
     console.log("/Get Waiters")
     try {
