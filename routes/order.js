@@ -7,7 +7,8 @@ router.post("/", async (req, res) => {
     try {
         const db = await connection;
         const { meals, waiter_id, cust_id } = req.body;        
-        let total_amount = meals.reduce((a,b)=> a.price + b.price)
+        let total_amount = meals.length>1?meals.reduce((a,b)=> a.price + b.price):meals[0].price
+        
         const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
         
         const sql = `INSERT INTO orders (meals, waiter_id, cust_id, total_amount, quantity, order_time) VALUES (?,?,?,?,?,?)`
