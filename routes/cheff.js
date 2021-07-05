@@ -25,10 +25,9 @@ router.get("/", async (req, res) => {
         if (req.query.q) {
             sql = `SELECT * FROM cheffs WHERE name LIKE ? `
             const [rows, fields] = await db.execute(sql, [req.query.q+"%"])
-            if(rows.length == 0)
-                res.status(204).send()
-            else
-                res.status(200).send(rows)
+            const count = await db.query(`SELECT COUNT(cheff_id) as count FROM cheffs`, []);
+            res.status(200).send({pages: Math.ceil(count[0][0].count/limit), rows})
+            
         } else if(req.query.limit && req.query.page) {
             const {limit, page} = req.query;
             sql = `SELECT * FROM cheffs ORDER BY cheff_id LIMIT ? OFFSET ?;`
